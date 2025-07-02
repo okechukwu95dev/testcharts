@@ -80,8 +80,7 @@ const CatfishGrowthExplorer = () => {
 
   const currentPhaseData = phaseData[selectedPhase];
 
-  // Interpolate data for smooth slider interaction
-  const interpolatedData = useMemo(() => {
+const interpolatedData = useMemo(() => {
     const result = [];
     const data = currentPhaseData.data;
 
@@ -90,7 +89,6 @@ const CatfishGrowthExplorer = () => {
       if (exactMatch) {
         result.push(exactMatch);
       } else {
-        // Linear interpolation
         const before = data.filter((d) => d.day < day).pop();
         const after = data.find((d) => d.day > day);
 
@@ -108,7 +106,7 @@ const CatfishGrowthExplorer = () => {
       }
     }
     return result;
-  }, [selectedPhase]);
+}, [selectedPhase, currentPhaseData.data, currentPhaseData.maxDay]);
 
   // Adjust selectedDay when switching phases
   const adjustedDay = Math.min(selectedDay, currentPhaseData.maxDay);
